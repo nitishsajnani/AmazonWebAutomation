@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<suite name="Test Set">
+ <listeners>
+   <listener class-name="in.amazon.utilities.Listeners"/>
+  </listeners>
+	<test name="test amazon sorting logic">
+		<classes>
+			<class
+				name="in.amazon.tests.TestAmazon" />
+		</classes>
+	</test>
+</suite>

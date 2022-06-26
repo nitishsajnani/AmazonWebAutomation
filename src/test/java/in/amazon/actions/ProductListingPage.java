@@ -34,13 +34,9 @@ public class ProductListingPage extends GetPage {
 	 	clickOnButton(element("brand_checkbox",brandName),"brand "+ brandName);
 	 	hardWait(5);
 	}
-	public void clickOnSort() {
-		Select sd= new Select(element("sortFeature_dd"));
-		sd.selectByVisibleText("Price: High to Low");
-	 	//clickOnButton(element("sortFeature_dd"),"sort by feature");
-	 	//clickOnButton(element("sort_dd"),"sort");
-	 	//clickOnButton(element("sortFeature_dd"),"sort by high to low");
-
+	public void clickOnSort(String sortingType) {
+		element("sortFeature_dd").click();
+	 	clickOnButton(element("sort_dd",sortingType),sortingType);
 	}
 	
 	public void selectProductByIndex(int position) {

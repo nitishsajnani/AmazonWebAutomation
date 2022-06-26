@@ -28,18 +28,17 @@ public class TestAmazon extends BaseTest {
 	@Test
 	public void TC003_UserSortingTheProductByHighToLowPrice() {
 		
-       // amazon.productListingPage.clickOnSort();
-        //amazon.productListingPage.clickOnSort();
-		Reporter.log("User navigated to product brand selection box ",true);
+        amazon.productListingPage.clickOnSort("Price: High to Low");
+		Reporter.log("Sort the product by price high to low ",true);
 	}	
 	
 	@Test
 	public void TC004_OpenSecondHighestProductInNewWindow() {
-		amazon.productListingPage.selectProductByIndex(2);//
+		amazon.productListingPage.selectProductByIndex(1);//
 		Reporter.log("User open product which is  second highest in price",true);
 
 	}	
-	@Test(dependsOnMethods="TC004_OpenSecondHighestProductInNewWindow")
+	@Test
 	public void TC005_verifyAboutThisAndLogProductDetailSection() {
 		amazon.productPage.verifyAboutThis("About this item");
 		amazon.productPage.logProductDescription();

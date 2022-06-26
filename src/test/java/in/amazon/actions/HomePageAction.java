@@ -30,16 +30,16 @@ public class HomePageAction extends GetPage {
 	 	clickOnButton(element("tv_link"),"tv");
 	}
 
-public void ScrollToShopByDepartment() {
-((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element("shopBydept_txt"));
+public void ScrollToFilterType(String filter) {
+	scrollToElement(element("shopBydept_txt",filter));
 try {
 	Thread.sleep(500);
-	 logMessage("User scrolled to shop by department");
+	 logMessage("User scrolled to filter "+filter);
 
 } catch (InterruptedException e) {
 	// TODO Auto-generated catch block
 	e.printStackTrace();
-	 logMessage("User not able to find shop by department");
+	 logMessage("User not able to find filter type");
 
 }
 }

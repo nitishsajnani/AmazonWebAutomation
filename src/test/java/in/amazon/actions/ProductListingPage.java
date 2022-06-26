@@ -1,10 +1,12 @@
 package in.amazon.actions;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 
 import in.amazon.getpageobjects.GetPage;
 public class ProductListingPage extends GetPage {
@@ -14,38 +16,38 @@ public class ProductListingPage extends GetPage {
 		super(driver, "ProductListing");
 		this.driver = driver;
 	}
-	public void ScrollToBrandSelectionBox() {
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element("brand_txt"));
+	public void ScrollToFilterSelectionBox(String filterType) {
+		scrollToElement(element("brand_txt",filterType));
 		try {
 			Thread.sleep(500);
-			 logMessage("User scrolled to brand selection box");
+			 logMessage("User scrolled to brand selection box "+filterType);
 
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			 logMessage("User not able to find brand selection box");
+			 logMessage("User not able to find selection box");
 
 		}
 		}
-	public void selectbrand() {
-	 	clickOnButton(element("brand_checkbox"),"brand checkbox");
+	public void selectbrand(String brandName) {
+		waitForPageToLoadCompletely();
+	 	clickOnButton(element("brand_checkbox",brandName),"brand "+ brandName);
+	 	hardWait(5);
 	}
 	public void clickOnSort() {
-	 	clickOnButton(element("sortFeature_dd"),"sort by feature");
-	 	clickOnButton(element("sort_dd"),"sort");
+		Select sd= new Select(element("sortFeature_dd"));
+		sd.selectByVisibleText("Price: High to Low");
+	 	//clickOnButton(element("sortFeature_dd"),"sort by feature");
+	 	//clickOnButton(element("sort_dd"),"sort");
 	 	//clickOnButton(element("sortFeature_dd"),"sort by high to low");
 
 	}
 	
 	public void selectProductByIndex(int position) {
-	List<WebElement> products=elements("product_link");
-	products.get(position).click();
-   
+       hardWait(5);
+		List<WebElement> element = elements("product_link");
+	element.get(position).click();
+	openNewTab();
+	
 	}
-	
-	public void switchedToWindow() {
-		
-	   
-		}
-	
 }

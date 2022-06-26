@@ -14,6 +14,7 @@ public class ProductPage extends GetPage {
 	}
 
 	public void verifyAboutThis(String expected) {
+		scrollToElement(element("aboutThis_txt"));
 		Assert.assertEquals(element("aboutThis_txt").getText(),expected,"Testcase Failed:String is not matched");
 		logMessage("Testcase Passed:String is matched");
 	}

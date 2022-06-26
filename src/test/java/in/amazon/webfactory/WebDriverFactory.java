@@ -30,6 +30,7 @@ public class WebDriverFactory {
 
 	public WebDriver getDriver(Map<String, String> seleniumconfig) {
 		browser = System.getProperty("browser");
+		if (seleniumconfig.get("server").equalsIgnoreCase("local")) {
 		if (browser == null || browser.isEmpty()) {
 			browser = seleniumconfig.get("browser");
 		}
@@ -40,10 +41,19 @@ public class WebDriverFactory {
 			} else if (browser.equalsIgnoreCase("chrome")) {
 				return getChromeDriver();
 			}
-		
-		return new FirefoxDriver();
-	}
-
+		return new FirefoxDriver();}
+	if (seleniumconfig.get("server").equalsIgnoreCase("remote")) {
+		if (browser == null || browser.isEmpty()) {
+			browser = seleniumconfig.get("browser");
+		}
+		System.out.println("Browser=" + browser);
+		Reporter.log(browser, true);
+			if (browser.equalsIgnoreCase("chrome")||browser.equalsIgnoreCase("firefox")) {
+				return remoteDriver(browser,seleniumconfig.get("remoteURL"));
+			}}
+	 return remoteDriver(browser,seleniumconfig.get("remoteURL"));
+		}
+	
 	
 
 	private static WebDriver getChromeDriver() {
@@ -76,7 +86,7 @@ public class WebDriverFactory {
 
 	private static WebDriver getFirefoxDriver() {
 		FirefoxProfile profile = new FirefoxProfile();
-		WebDriverManager.firefoxdriver()  .setup();
+		WebDriverManager.firefoxdriver().setup();
 		DesiredCapabilities capabilities = DesiredCapabilities.firefox();
 		capabilities.setCapability("marionette", true);
 		profile.setPreference("browser.cache.disk.enable", false);
@@ -84,4 +94,26 @@ public class WebDriverFactory {
 				System.getProperty("user.dir"));
 		return new FirefoxDriver();
 	}
-}
+	
+	private static WebDriver remoteDriver(String browser, String remoteURL) {
+		DesiredCapabilities capForChrome = DesiredCapabilities.chrome();
+		DesiredCapabilities capForFirefox= DesiredCapabilities.firefox();
+	
+	    if(browser.equalsIgnoreCase("chrome"))
+			try {
+				return new RemoteWebDriver(new URL(remoteURL),capForChrome);
+			} catch (MalformedURLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		else
+			try {
+				return new RemoteWebDriver(new URL(remoteURL),capForFirefox);
+			} catch (MalformedURLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+ return null;
+	}
+		
+	}

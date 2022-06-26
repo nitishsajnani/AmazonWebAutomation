@@ -6,6 +6,8 @@ JDK 1.8 or above
 Maven 3.2 or above
 Eclipse or IDE of choice in case there is need to update the script. (optional)
 Create Maven project and import below dependencies
+install docker in local machine
+install vnc
 
 Selenium
 TestNG
@@ -35,3 +37,23 @@ Maven Jenkins and Git:
 
 run over jenkins run command java -jar jenkins.war
 Create maven project configure github with your credentials now give goals and then click now Build Now
+
+
+Dockerising:
+install docker 
+ docker pull selenium/hub        
+ docker pull selenium/node-chrome-debug                     
+ docker pull selenium/node-firefox-debug 
+ setup selenium grid over docker
+ docker run -d -p 4444:4444 --name selenium-hub selenium/hub  
+ docker run -d -P --link selenium-hub:hub  selenium/node-chrome-debug
+docker run -d -P --link selenium-hub:hub  selenium/node-firefox-debug
+
+
+Refer config.properties
+
+you can run over selenium grid after selecting server local to remote
+                  
+
+
+

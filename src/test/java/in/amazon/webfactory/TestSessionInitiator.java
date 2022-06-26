@@ -37,7 +37,7 @@ public class TestSessionInitiator {
 	}
 	
 	private static Map<String, String> _getSessionConfig() {
-		String[] configKeys = { "tier", "browser", "timeout"};
+		String[] configKeys = { "tier", "browser", "server","remoteURL","timeout"};
 		Map<String, String> config = new HashMap<String, String>();
 		for (String string : configKeys) {
 			

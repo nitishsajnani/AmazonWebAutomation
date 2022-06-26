@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 public class TestAmazon extends BaseTest {
 
 	public TestAmazon(String baseUrl) {
-		super("loginApp.baseUrl");
+		super("HomePage.baseUrl");
 	}
 	
 	@Test
